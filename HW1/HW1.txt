@@ -1,0 +1,41 @@
+Michelle Vo
+Ling191A Spring 2020
+HW 1
+
+
+
+Task 3:
+
+This strategy for counting characters failed because our heuristic of capturing
+all the characters is not accurate. That is, not every line in which the first word
+ends with a period, is a character. The result we then get are phrases and the ends of sentences,
+rather than just the character names. In other words, our heuristic captures too much, and a better
+strategy for counting characters would probably use regular expressions to trim the list more accurately.
+
+A better heuristic to eliminate non-characters in our character list is to only include words which
+begin with a capital letter, since every proper noun starts with a capital letter. ^[A-Z]
+This would eliminate all phrases that might have began with a number or started with a lower case 
+(and therefore isn't a name/character). Another would be to ensure that the string ended with a "." using
+the $ anchor. My code simply checked whether the string contained a ".", which could introduce phrases that aren't
+characters, but words with a . inside it. 
+
+
+Task 4: 
+
+(1) Strings which consist of a single vowel in English 
+    '[aeiouAEIOU]' 
+
+or ^[^aeiouAEIOU]*[aeiouAEIOU][^aeiouAEIOU]* 
+	This version restricts to only having one vowel. 
+
+(2) Strings beginning with 'str'
+   '^[s][t][r].*' 
+
+(3) Strings beginning with two consonants, where the first one is NOT s
+   '^[^saeiouAEIOU][^aeiouAEIOU].*
+
+(4) Strings ending in a vowel
+    '.*[aeiouAEIOU]$'
+
+(5) String ending in one of the following suffixes: "-tion", "-sion", "-ity", "-ic"
+  '.*(tion|sion|ity|ic)$'
