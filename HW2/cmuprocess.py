@@ -10,7 +10,6 @@
 
 cmu = {}
 empty = list()
-# Your code here
 
 # orthography is key
 # transcription is value, as a list of phonemes. 
@@ -43,8 +42,6 @@ print(cmu['CRUMB'])
 
 subtlexList = []
 
-# Your code here
-
 subtlex = open("subtlexUS.txt", "r")
 for line in subtlex.readlines():
     subtlexLine = line.strip()
@@ -59,7 +56,7 @@ for word in list(cmu.keys()):
      
 
 
-# Task 3 Test Cases
+## Task 3 Test Cases
 
 keys = sorted(cmu.keys())[0:9]
 print(*[str(x)+": "+str(cmu[x]) for x in keys],sep='\n')
@@ -112,7 +109,8 @@ vowels = ["AA","AE","AH","AO","AW","AY","EH","ER","EY","IH","IY","OW","OY","UH",
 onsets = {}
 codas = {}
 
-# Your code here
+
+## isVowel helper function checks if element is a vowel
 
 def isVowel(element):
     return ("0" in element or "1" in element or "2" in element or element in vowels)
