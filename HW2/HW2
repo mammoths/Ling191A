@@ -1,0 +1,24 @@
+Michelle Vo
+Ling 191A 
+Spring 2020 
+Homework 2 
+
+
+
+1. First impressions of the file cmudict.txt:
+
+	This file is the Carnegie Mellon dictionary. Since the file is
+	very large, it is important to note that each line follows a convention. If it begins with ";;;" it is a commentary. 
+
+	The first chunk of the dictionary are non alpha numeric characters. In each line, the first string of characters are the orthographic representation of the word, followed by a chunk of white space, then the CMU transcription, chunk by chunk. It would be useful to ignore lines that begin with ";;;". 
+
+	Pattern matching can be done by reading input line by line.  
+	
+	If your goal is to count how many words have a particular onset cluster in English, entries that could be disregarded are repeats
+	(words that have multiple instances, like ABSTAINED and ABSTAINED(1)).
+
+2.  
+
+
+
+
