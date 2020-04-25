@@ -1,3 +1,4 @@
+import re
 
 ############
 # Task 1
@@ -17,89 +18,134 @@ tester = testFile.readline()
 
 ## Make a new list that just equates to one input string.
 
-
+def Reverse(lst): 
+    lst.reverse() 
+    return lst 
 
 
 #syllabify takes as input a list of phonemes, and outputs a astring where the syllables
 # are separated by +
 def syllabify(raw):
     
-    raw = raw.strip()
     raw = raw.split()
+    
+
+    
     syllabified = []#initialize a list to hold the syllabified word
     onset = []
     coda = []
     nuclei = []
- 
     onsetMax = 0;
-    syllable = []## consonants can be added to onset as long as their son diff is 2+
-    for n in raw:
+    syllable = [] 
+
+    for n in reversed(raw):
         #check each element if it exists in in our sonorant dict
         if (n not in son):
             syllabified.append(n)
+            continue
+            ## add it to the list anyway.
         elif (n in son):
-            syllable.append(n)
-            ### If the element is a phoneme we recognize. 
+            ### If the element is a phoneme we recognize
             level = son.get(n)
-            
-            if level == 4 and coda != []:
-                ## we've got a syllable so pop that onto the return list.
-                syllabified.append(syllable)
-                syllabified.append("+")
-                ## Reset everything..
-                syllable = []
-                onset = []
-                coda = []
-                nuclei = [] 
-                continue; 
-                
-            if level == 4 and coda == []: ## We got a value
+            if (level == 4 and coda == []):
+                ## Our syllable ends in a vowel, no coda. 
                 nuclei.append(n)
-               
-                continue
-            if onset == [] or nuclei == []: # first consonant
-                onset.append(n)
-                onsetMax = level
+                syllable.append(n)
                 
+                syllabified.append(Reverse(syllable))
+                
+                syllable = []
+                nuclei = []
                 continue
-            elif onset != [] and coda == []: 
-                if (level - onsetMax >= 2): 
-                    if (n == 'S'):
-                        coda.append(n)
+            elif (level == 4 and coda != []):
+                 nuclei.append(n)
+                 syllable.append(n)
+                 syllabified.append('+')
+                 syllabified.append(Reverse(syllable))
+                 
+                 syllable = []
+                 continue                 
+            elif (level != 4):
+                #  Our consonant. 
+                # if nucleus is empty during this encounter..
+                if (nuclei == []):
+                    coda.append(n)
+                    syllable.append(n)
+                    continue
+                elif (nuclei != []):
+                    if (level - onsetMax >= 2):
+                        onset.append(n)
+                        onsetMax = level 
+                        syllable.append(n)
                         continue
                     else:
-                        onset.append(n)
-                        onsetMax = level - onsetMax 
-                    continue
-                else:
-                    coda.append(n)      
-                    
-                    #coda no longer empty so we close onset.
-            
+                        syllable.append(n)
+                        syllabified.append(Reverse(syllable))
+                        #
+                        syllable = []
+                        
+                        coda = []
+                        coda.append(n)
+                        nuclei = []
+                        onset = []
+            else:
+                 syllabified.append(Reverse(syllable))
+                # syllabified.append('+')
+                 syllable = []
+                        
+                 coda = []
+                 coda.append(n)
+                 nuclei = []
+                 onset = []
                 
-                    ## add the consonant to coda. 
-                
+    if (syllabified[0] == '+'):
+        syllabified.pop(0)
+         #extraneous + sign.
     
-    return(syllabified)
-            
-            
-            ## if element in raw is in Son, then 
-            ## calculate the Onset (initial consonants.)
-            ## calculate the Coda
-            ## Nuclei are all vowel sounds sonority 4
-            ## AH B 
-            ## ZAORP
-            ## SH AH N 
-            ## three syllables here. 
+    
+    
+    return(Reverse(syllabified))
             
      
-
-
 
 
 ###########
 # Task 2
 ###########
 
+testFile = open("test.txt", "r") 
+output = open("output.txt", "w")
+for line in testFile.readlines():
+  
+    result = str(syllabify(line))
     
-# Read in test.txt, syllabify each line, and write out output.txt
+    
+    result = result.replace(',' , '')
+    result = result.replace('[' , '')
+    result = result.replace(']' , '')
+    
+   
+    
+    res = str(result)[1:-1] 
+    res = res.replace("'", "")
+    res = res.replace('"', "")
+   
+    
+    output.write(str(res) + '\n')
+    
+    
+    
+    
+    ## now output result to output.txt
+    
+    
+# Read in test.txt, 
+
+#syllabify each line, and write out output.txt
+    
+
+
+
+
+
+

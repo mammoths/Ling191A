@@ -1,0 +1,33 @@
+Task 3:
+
+My output did not match the expected output of evaluate. I got:
+Misparsed:       EHR+LAHS       as
+                 EH+RLAHS
+Misparsed:       AE+LAHS        as
+                 AEL+AHS
+Misparsed:       EH+NIY+BAH+DIY         as
+                 EH+NIY+BAHD+IY
+Misparsed:       AH+SHUH+RAHD+LIY       as
+                 AH+SHUHR+AHDL+IY
+Misparsed:       AH+TEHN+TIHV+LIY       as
+                 AH+TEHN+TIHVL+IY
+Misparsed:       BAA+KUW        as
+                 BAAK+UW
+Misparsed:       BAE+NER        as
+                 BAEN+ER
+Misparsed:       BAH+NIY+TOW    as
+                 BAH+NIYT+OW
+Misparsed:       BER+LIHNG+TAHN         as
+                 BERL+IHNG+TAHN
+Misparsed:       KAE+LAH+PERZ   as
+                 KAEL+AH+PERZ
+Misparsed:       KEH+RIY        as
+
+
+While output gets some of the words correct, it incorrectly parses on words that begin with vowel. Sometimes it a coda will be 
+incorrectly added to a nucleus. Sometimes a nucleus does not have onset or coda, and my machine does not consistently isolate that. 
+I wish there was a cleaner way to obtain the results I got - I ended up reversing syllables, and my solution was a bit roundabout. 
+
+I think the challenging part is determining the coda and onset length correctly. Many things were parsed similarly, but not quite there. 
+For example: BER + LIGHNG + TAHN was parsed in my code as BERL + IHNG + TAHN, because the coda has too many consonants. This might be because
+Onset Maximization might be applied here on accident. 

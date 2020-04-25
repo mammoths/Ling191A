@@ -1,4 +1,4 @@
-
+from sys import exit
 out = open("output.txt")
 corr = open("correct.txt")
 
